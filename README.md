@@ -22,6 +22,7 @@ the GNU xargs is used by default by being listed earlier in the user PATH enviro
 
 From https://stackoverflow.com/a/20609719
 
+If you want to remove many blobs from your Git repository, then the below information might be helpful.
 ```
 cd ${TOP_LEVEL_GIT_REPO_DIRECTORY}
 
