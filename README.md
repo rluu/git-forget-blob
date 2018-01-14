@@ -10,6 +10,14 @@ Completely remove a file from your git repository, including old commits, reflog
 
     git forget-blob file-to-forget
 
+## Caveats
+
+Script `git-forget-blob.sh` assumes that GNU xargs exists on the system and is in the system PATH.
+However, Mac OS X ships with a BSD xargs by default, which does not support the `--no-run-if-empty` option.
+The workaround is to use Homebrew to install and use the `findutils` package, which contains GNU xargs.
+Then either update the `git-forget-blob.sh` to use this different version of xargs, or ensure that 
+the GNU xargs is used by default by being listed earlier in the user PATH environment variable.
+
 ## Other Information
 
 From https://stackoverflow.com/a/20609719
@@ -27,9 +35,7 @@ git rev-list --objects --all | \
     tail -10 | \
     awk '{print$1}')"
 
-# Direct the above command's output to a text file, and then 
-# use that text files contents in a bash loop as arguments when 
-# running the script. 
+# Direct the above command's output to a text file.
 git rev-list --objects --all | \
     grep "$(git verify-pack -v .git/objects/pack/*.idx | \
     sort -k 3 -n | \
